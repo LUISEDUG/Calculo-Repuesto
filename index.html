@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotización de Repuestos LG</title>
+    <style>
+        /* Estilos generales y colores de la marca LG */
+        :root {
+            --lg-blue: #007BFF; /* Puedes cambiar este color por el azul de LG si lo tienes */
+            --lg-black: #222222; 
+            --lg-gray: #f0f2f5;
+            --lg-green: #28a745;
+        }
+
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--lg-gray);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        h1 {
+            color: var(--lg-black);
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--lg-black);
+        }
+
+        select, input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            color: #fff;
+            background-color: var(--lg-blue);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #resultado {
+            margin-top: 25px;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--lg-green);
+            min-height: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Cotización de Repuestos LG</h1>
+    
+    <div class="input-group">
+        <label for="tipoCliente">Seleccione tipo de cliente:</label>
+        <select id="tipoCliente">
+            <option value="">-- Seleccionar --</option>
+            <option value="ott">OTT</option>
+            <option value="venta-publico">VENTA PUBLICO</option>
+            <option value="mayorista">MAYORISTA</option>
+            <option value="tecnico">TECNICO</option>
+            <option value="shipto">SHIPTO</option>
+            <option value="mercado-local">MERCADO LOCAL</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <label for="valorEntrada">Ingrese el valor:</label>
+        <input type="number" id="valorEntrada" placeholder="0.00" step="any">
+    </div>
+
+    <button onclick="calcularValor()">Calcular</button>
+
+    <div class="output-group">
+        <p>Valor cotizado:</p>
+        <p id="resultado"></p>
+    </div>
+</div>
+
+<script>
+    function calcularValor() {
+        const valorEntrada = document.getElementById('valorEntrada').value;
+        const tipoCliente = document.getElementById('tipoCliente').value;
+
+        // Validar que se haya seleccionado una opción y se haya ingresado un valor
+        if (tipoCliente === "" || valorEntrada === "") {
+            document.getElementById('resultado').textContent = "Por favor, seleccione un cliente e ingrese un valor.";
+            document.getElementById('resultado').style.color = "#dc3545"; // Color de error
+            return;
+        }
+
+        const valorNumerico = parseFloat(valorEntrada);
+        let resultadoCalculado;
+
+        // Función para redondear el valor al millar más cercano, como el redondeo en Excel
+        function redondearPVP(valor) {
+            return Math.ceil(valor / 10000) * 10000;
+        }
+
+        // El cálculo cambia según el tipo de cliente seleccionado
+        switch(tipoCliente) {
+            case 'ott':
+                if (valorNumerico <= 300000) {
+                    resultadoCalculado = redondearPVP((((valorNumerico * 0.063) + valorNumerico) / 0.79) * 1.19);
+                } else {
+                    resultadoCalculado = redondearPVP((((valorNumerico * 0.063) + valorNumerico) / 0.83) * 1.19);
+                }
+                break;
+            case 'venta-publico':
+                if (valorNumerico <= 250000) {
+                    resultadoCalculado = redondearPVP((((valorNumerico * 0.063) + valorNumerico) / 0.72) * 1.19);
+                } else {
+                    resultadoCalculado = redondearPVP((((valorNumerico * 0.063) + valorNumerico) / 0.76) * 1.19);
+                }
+                break;
+            case 'tecnico':
+                if (valorNumerico <= 250000) {
+                    resultadoCalculado = redondearPVP((((valorNumerico * 0.063) + valorNumerico) / 0.77) * 1.19);
+                } else {
+                    resultadoCalculado = redondearPVP((((valorNumerico * 0.063) + valorNumerico) / 0.8) * 1.19);
+                }
+                break;
+            case 'mayorista':
+                resultadoCalculado = redondearPVP((((valorNumerico * 0.063) + valorNumerico) / 0.85) * 1.19);
+                break;
+            case 'shipto':
+                resultadoCalculado = redondearPVP(((valorNumerico / 0.87) * 1.19));
+                break;
+            case 'mercado-local':
+                resultadoCalculado = redondearPVP(((valorNumerico / 0.85) * 1.19));
+                break;
+            default:
+                document.getElementById('resultado').textContent = "Selección no válida.";
+                document.getElementById('resultado').style.color = "#dc3545";
+                return;
+        }
+
+        // Mostrar el resultado final con formato de moneda
+        document.getElementById('resultado').textContent = resultadoCalculado.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
+        document.getElementById('resultado').style.color = "#28a745"; // Color de éxito
+    }
+</script>
+
+</body>
+</html>
