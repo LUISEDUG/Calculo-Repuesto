@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-sclae=1.0">
     <title>Cotización de Repuestos LG</title>
     <style>
         /* Estilos generales y colores de la marca LG */
@@ -81,7 +81,7 @@
 
         #resultado {
             margin-top: 25px;
-            font-size: 24px;
+            font-size: 30px; /* Tamaño de fuente más grande */
             font-weight: bold;
             color: var(--lg-green);
             min-height: 30px;
@@ -142,7 +142,7 @@
         // El cálculo cambia según el tipo de cliente seleccionado
         switch(tipoCliente) {
             case 'ott':
-                if (valorNumerico <= 250000) {
+                if (valorNumerico <= 300000) {
                     resultadoCalculado = redondearPVP((((valorNumerico * 0.063) + valorNumerico) / 0.79) * 1.19);
                 } else {
                     resultadoCalculado = redondearPVP((((valorNumerico * 0.063) + valorNumerico) / 0.83) * 1.19);
@@ -169,7 +169,7 @@
                 resultadoCalculado = redondearPVP(((valorNumerico / 0.87) * 1.19));
                 break;
             case 'mercado-local':
-                resultadoCalculado = redondearPVP(((valorNumerico / 0.80) * 1.19));
+                resultadoCalculado = redondearPVP(((valorNumerico / 0.85) * 1.19));
                 break;
             default:
                 document.getElementById('resultado').textContent = "Selección no válida.";
@@ -184,5 +184,4 @@
 </script>
 
 </body>
-
 </html>
