@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Valor</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 25px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #resultado {
+            margin-top: 25px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+            min-height: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Calculadora de Valor</h1>
+    
+    <div class="input-group">
+        <input type="number" id="valorEntrada" placeholder="Ingrese un valor" step="any">
+    </div>
+
+    <button onclick="calcularValor()">Calcular</button>
+
+    <div class="output-group">
+        <p>El resultado es:</p>
+        <p id="resultado"></p>
+    </div>
+</div>
+
+<script>
+    function calcularValor() {
+        // Obtener el valor ingresado por el usuario
+        const valorEntrada = document.getElementById('valorEntrada').value;
+
+        // Validar que el valor no esté vacío
+        if (valorEntrada === "") {
+            document.getElementById('resultado').textContent = "Por favor, ingrese un valor.";
+            document.getElementById('resultado').style.color = "#dc3545"; // Color de error
+            return;
+        }
+
+        // Convertir el valor a un número y realizar el cálculo
+        const valorNumerico = parseFloat(valorEntrada);
+        const resultadoCalculado = (valorNumerico / 0.80) * 1.19;
+
+        // Mostrar el resultado en el campo correspondiente
+        document.getElementById('resultado').textContent = resultadoCalculado.toFixed(2); // .toFixed(2) para mostrar 2 decimales
+        document.getElementById('resultado').style.color = "#28a745"; // Color de éxito
+    }
+</script>
+
+</body>
+</html>
