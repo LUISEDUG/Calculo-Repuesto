@@ -86,6 +86,12 @@
             color: var(--lg-green);
             min-height: 30px;
         }
+
+        .footer {
+            margin-top: 25px;
+            font-size: 12px;
+            color: #777;
+        }
     </style>
 </head>
 <body>
@@ -117,6 +123,10 @@
         <p>Valor cotizado:</p>
         <p id="resultado"></p>
     </div>
+
+    <div class="footer">
+        <p>By Electro Service S.A</p>
+    </div>
 </div>
 
 <script>
@@ -142,7 +152,7 @@
         // El cálculo cambia según el tipo de cliente seleccionado
         switch(tipoCliente) {
             case 'ott':
-                if (valorNumerico <= 300000) {
+                if (valorNumerico <= 250000) {
                     resultadoCalculado = redondearPVP((((valorNumerico * 0.063) + valorNumerico) / 0.79) * 1.19);
                 } else {
                     resultadoCalculado = redondearPVP((((valorNumerico * 0.063) + valorNumerico) / 0.83) * 1.19);
@@ -169,7 +179,7 @@
                 resultadoCalculado = redondearPVP(((valorNumerico / 0.87) * 1.19));
                 break;
             case 'mercado-local':
-                resultadoCalculado = redondearPVP(((valorNumerico / 0.85) * 1.19));
+                resultadoCalculado = redondearPVP(((valorNumerico / 0.80) * 1.19));
                 break;
             default:
                 document.getElementById('resultado').textContent = "Selección no válida.";
