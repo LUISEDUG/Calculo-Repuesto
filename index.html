@@ -153,27 +153,27 @@
         switch(tipoCliente) {
             case 'ott':
                 if (valorNumerico <= 250000) {
-                    resultadoCalculado = redondearPVP((((valorNumerico * 0.063) + valorNumerico) / 0.79) * 1.19);
+                    resultadoCalculado = redondearPVP(((valorNumerico * 1.063) / 0.79) * 1.19);
                 } else {
-                    resultadoCalculado = redondearPVP((((valorNumerico * 0.063) + valorNumerico) / 0.83) * 1.19);
+                    resultadoCalculado = redondearPVP(((valorNumerico * 1.063) / 0.83) * 1.19);
                 }
                 break;
             case 'venta-publico':
                 if (valorNumerico <= 250000) {
-                    resultadoCalculado = redondearPVP((((valorNumerico * 0.063) + valorNumerico) / 0.72) * 1.19);
+                    resultadoCalculado = redondearPVP(((valorNumerico * 1.063)/ 0.72) * 1.19);
                 } else {
-                    resultadoCalculado = redondearPVP((((valorNumerico * 0.063) + valorNumerico) / 0.76) * 1.19);
+                    resultadoCalculado = redondearPVP(((valorNumerico * 1.063) / 0.76) * 1.19);
                 }
                 break;
             case 'tecnico':
                 if (valorNumerico <= 250000) {
-                    resultadoCalculado = redondearPVP((((valorNumerico * 0.063) + valorNumerico) / 0.77) * 1.19);
+                    resultadoCalculado = redondearPVP(((valorNumerico * 1.063) / 0.77) * 1.19);
                 } else {
-                    resultadoCalculado = redondearPVP((((valorNumerico * 0.063) + valorNumerico) / 0.8) * 1.19);
+                    resultadoCalculado = redondearPVP(((valorNumerico * 1.063) / 0.8) * 1.19);
                 }
                 break;
             case 'mayorista':
-                resultadoCalculado = redondearPVP((((valorNumerico * 0.063) + valorNumerico) / 0.85) * 1.19);
+                resultadoCalculado = redondearPVP(((valorNumerico * 1.063)/ 0.85) * 1.19);
                 break;
             case 'shipto':
                 resultadoCalculado = redondearPVP(((valorNumerico / 0.87) * 1.19));
@@ -195,3 +195,4 @@
 
 </body>
 </html>
+
